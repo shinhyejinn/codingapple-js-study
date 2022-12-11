@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="main1.css">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand">Navbar</span>
+      <span class="badge bg-dark">Dark 🔄</span>
+      <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav> 
+
+  <div class="black-bg">
+    <div class="white-bg">
+      <h4>로그인하세요</h4>
+
+      <form action="success.html">
+        <div class="my-3">
+          <input type="text" class="form-control" id="email">
+        </div>
+        <div class="my-3">
+          <input type="password" class="form-control" id="pw">
+        </div>
+        <button type="submit" class="btn btn-primary" id="send">전송</button>
+        <button type="button" class="btn btn-danger" id="close">닫기</button>
+      </form>
+
+    </div>
+  </div>
+
+
+  <div class="main-bg">
+    <h4>셔츠 세일</h4>
+    <button id="login" class="btn btn-danger">로그인</button>
+  </div>
+
+  <div class="alert alert-danger">
+    <span class="count">5</span>초 이내 구매 시 사은품 증정!
+  </div>
+
+  <script>
+    //정규식 : 사용자가 입력한 값을 비교함
+    /* /[비교할거]/.test('입력한거')
+      /[a-z]/.test('abced') << 이렇게도 가능 a부터z까지(문자범위 지정) 비교가능
+      \S == 아무문자 1개라는 뜻
+      ^a == a로 시작하는 문자
+      a$ == a로 끝나는 문자
+      a|b == a 또는 b
+      +는 왼쪽 문자 반복 검색
+    */
+
+
+   //1초마다 5라는 문자를 1씩 감소, 숫자가 0이되면 박스 사라지게
+   const changes = document.querySelector('.count')
+   const test = setInterval(function(){
+     if(--changes.innerHTML <= 0){
+       $('.alert').hide();
+       clearInterval(test);
+      }
+   }, 1000)
+
+    
+    //setTimeout(function(){실행할 코드, 콜백함수 사용 가능}, ms) : n초 후 코드 실행
+    //5초 후 alert박스가 사라지게
+    /*setTimeout(function(){
+      $('.alert').hide();
+    }, 2000)*/
+
+    //setInterval(function(){실행할 코드}, ms) : n초마다 코드 반복 실행
+    /* setInterval(function(){
+       console.log('안녕');
+     }, 1000)*/
+
+    //버튼 누르면 글자가 dark/light 번갈아가며 바뀌게 
+    let count = 0; 
+    const change = document.querySelector('.badge')
+    $('.badge').on('click', function(){
+      count++;
+      if(count%2 === 1){
+        change.innerHTML = 'Light 🔄'
+      } else{
+        change.innerHTML = 'Dark 🔄'
+      }
+      console.log(count)
+    });
+    /* $('.badge').on('click', () => {
+      document.querySelector('.badge').innerHTML = ++count % 2 === 1 ? 'Light 🔄' : 'Dark 🔄'
+    }) */
+    /* const badge = document.querySelector('.badge')
+    $('.badge').on('click', () => {
+      if (++count % 2 === 1) {
+        badge.innerHTML = 'Light 🔄'
+      } else {
+        badge.innerHTML = 'Dark 🔄'
+      }
+    }) */
+
+
+    
+    document.getElementById('login').addEventListener('click', function () {
+      document.getElementsByClassName('black-bg')[0].classList.toggle('show');
+    })
+    document.getElementById('close').addEventListener('click', function () {
+      document.getElementsByClassName('black-bg')[0].classList.toggle('show');
+    })
+
+    $('form').on('submit', function() {
+      let email = document.getElementById('email').value;
+      
+      //공백검사
+      if (document.getElementById('email').value == '') {
+        alert('아이디를 입력하세요')
+      }
+     //정규식검사
+      if(/\S+@\S+\.\S+/.test(email) == false){
+        alert('이메일 형식이 아닙니다');
+      }
+
+      if(document.getElementById('pw').value == ''){
+        alert('비밀번호를 입력하세요')
+      } else if(0 < document.getElementById('pw').value.length < 5){
+        alert('비밀번호를 6자리 이상 입력하세요')
+      }
+    })
+    
+  </script>
+</body>
+
+</html>

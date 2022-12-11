@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>alert 만들기</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <div class="alertBox" id="box">
+      <p id="alert">아이디를 입력하세요</p>
+      <button id="close">닫기</button>
+    </div>
+    <!-- 자바 스크립트는 대체로 아이디를 사용함 -->
+    <!-- js에는 웬만하면 onclick 가능 -->
+    <button onclick="jjy('아이디입력')">아이디</button>
+    <button onclick="jjy('비번입력')">비번</button>
+    <script>
+      //스크립트 위치는 바디 가장 하단에
+
+      function jjy(inH){
+        document.getElementById('alert').innerHTML = inH;
+        document.getElementById('box').style.display= 'block';
+        /* document.getElementsByClassName('alertBox')[0] 
+        .getElementsByClassName('클래스명')[클래스명 순서지정]*/
+      }
+
+      //함수명+()세트세트 언제나 같이 써야함
+      //파라미터는 여러 개 사용 가능(콤마로 구분)
+
+      //함수 실행 시 구멍자리에 123 넣어서 실행
+      //jjy(123);
+      // jjy('block');
+      // jjy('none');
+
+      // function shj(){
+      //   document.getElementById('box').style.display = 'none';
+      // }
+
+
+      document.getElementById('close').addEventListener('click', function(){
+      //addEventListener : 왼쪽 요소(겟아이디)가 클릭되면 함수 실행
+      document.getElementById('box').style.display = 'none'
+    });
+
+
+      function plus(hole){ // 구멍뚫음
+        2 + hole // 구멍타고 온게 여기에 꽂힘
+      }
+      
+      plus(1);
+      plus(2);
+      plus(3);
+
+    </script>
+
+</body>
+</html>
